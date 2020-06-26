@@ -1,25 +1,32 @@
 def solution(board, nums):
+    SIZE = len(board) 
+
     answer = 0
-    num_set = set(nums)
-    d1_set = set()
-    d2_set = set()
-    board_size = len(board)
-    for j in range(board_size):
-        h_set = set(board[j])
-        v_set = set()
-        for i in range(board_size):
+    nums_set = set(nums) 
+    diagonal_Lset = set() #첫번째 대각선 빙고 집합
+    diagonal_Rset = set() #두번째 대각선 빙고 집합
+    v_set = set() #세로 빙고 집합
+    
+    for j in range(SIZE):
+        h_set = set(board[j]) #가로 빙고 집합
+        v_set.clear()
+
+        for i in range(SIZE):
             v_set.add(board[i][j])
+
             if j == i:
-                d1_set.add(board[j][i])
-            if i + j == board_size -1:
-                d2_set.add(board[j][i])
-        if not h_set - num_set:
+                diagonal_Lset.add(board[j][i])
+            if i + j == SIZE -1:
+                diagonal_Rset.add(board[j][i])
+        
+        if not h_set - nums_set:
             answer += 1
-        if not v_set - num_set:
+        if not v_set - nums_set:
             answer += 1
-    if len(d1_set) == board_size and not d1_set - num_set:
+
+    if len(diagonal_Lset) == SIZE and not diagonal_Lset - nums_set:
         answer += 1
-    if len(d2_set) == board_size and not d2_set - num_set:
+    if len(diagonal_Rset) == SIZE and not diagonal_Rset - nums_set:
         answer += 1
     
             
