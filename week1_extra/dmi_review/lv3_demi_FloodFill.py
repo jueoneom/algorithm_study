@@ -43,7 +43,7 @@ def bfs(n, m, x, y, image, visited):
             #     continue
             if visitable(next_x, next_y) and image[next_x][next_y] == image[x][y]:
                 queue.append({next_x, next_y})
-                visited[next_x][next_y]
+                visited[next_x][next_y] 
 
 #리팩토링은 시간이 남을 때! 우선은 통과하는 코드다! 자신있을 때 함수로 별도로 빼기
 #리팩토링 후
