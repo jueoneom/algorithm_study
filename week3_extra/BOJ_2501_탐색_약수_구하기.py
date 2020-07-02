@@ -1,14 +1,14 @@
 n, k = list(map(int, input().split() ))
-answer = []
+answer = set()
 
 for i in range(1, n + 1):
     if i * i > n : break
-    elif n % i == 0: answer.append(i)
+    elif n % i == 0: 
+        answer.add(i)
+        answer.add(n//i)
 
-for i in range(len(answer)-1, 0, -1):
-    if answer[i] * answer[i] == n: continue
-    answer.append(n // answer[i])
-answer.append(n)
+answer.add(n)
+answer = sorted(answer)
 if len(answer) < k:
     print(0)
 else:
