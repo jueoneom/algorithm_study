@@ -49,14 +49,14 @@ heap은 데이터가 지속적으로 정렬되어야 하며, 데이터의 삽입
 import heapq 
 ```
 
-- #### heapq의 time complexity
-- * get item : O(1)
-- * insert item : O(logn)
-- * delete item : O(logn)
-- * search item : O(n)
+- #### heapq의 time complexity 
+    * get item : O(1)
+    * insert item : O(logn)
+    * delete item : O(logn)
+    * search item : O(n)
 
 - #### heapq :: heapify
-주어진 리스트를 힙정렬한다.
+    주어진 리스트를 힙정렬한다.
 ```python
 import heapq 
 my_list = [1, 5, 3, 4]
@@ -64,8 +64,8 @@ heapq.heapify(my_list)
 ```
 
 - #### heapq :: heappush (logn)
-힙 정렬된 리스트의 힙 상태를 유지하면서 데이터를 삽입시킨다.
-(힙 정렬을 하지 않고 heappush시 이상하게 데이터가 구성된다.)
+    힙 정렬된 리스트의 힙 상태를 유지하면서 데이터를 삽입시킨다.
+    (힙 정렬을 하지 않고 heappush시 이상하게 데이터가 구성된다.)
 ```python
 import heapq 
 my_list = [1, 5, 3, 4]
