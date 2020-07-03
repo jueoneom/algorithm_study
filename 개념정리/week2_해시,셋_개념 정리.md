@@ -8,10 +8,9 @@
 Dictionary는 기본으로 dict 클래스에 구현되어있다. 
 
 ### 해시는 언제 사용해야하는가.
-- 리스트를 사용할 수 없을 때 : 원소에 접근하는 요소가 숫자 인덱스가 아닌 문자열이나 튜플일때, 사용한다.
+- 데이터의 중복이 없어도 될 때 : 집합의 모든 데이터는 유일함. 동일 원소를 제거할 때 사용하자.
 - 빠른 접근 / 탐색이 필요할 때 : 딕셔너리는 대부분의 시간복잡도가 O(1)로 탐색이 매우 빠른 자료구조임
 - 집계를 할때 : 코딩테스트에서는 각 원소의 개수를 세야하는 문제가 많이 나온다. 이때 사용하기 유용함! (collections의 모듈 Counter 클래스!!)
-
 
 ### Dictionary와 리스트의 시간 복잡도 비교
 
@@ -24,79 +23,106 @@ Dictionary는 기본으로 dict 클래스에 구현되어있다.
 | Search Item | O(1) | O(N) |
 
 
-- #### deque의 초기화
+- #### Dictionary :: init
     ```python
-    from collections import deque 
-    queue1 = deque() #빈큐 만들기
-    queue2 = deque([1, 2, 3]) #원소가 있는 큐 만들기
-    queue3 = deque(maxlen = 5) #최대 길이가 명시된 큐 만들기 ( maxlen에 도달시 그 후에 넣는 값은 pop->새값이 채워지는 구조)
+    dict1 = {} 
+    dict2 = dict()
+    dict3 = {'name' = 'a', 'age' = 60}
+    dict4 = {'countries': {'capital':'seoul','continent':'Asia'}}
     ```
-- #### deque :: push 연산
+- #### Dictionary :: Get
+    딕셔너리 원소를 가져올 때는 1)[] 2)get(key, x) 메소드를 사용한다.
+    1) 방법의 경우 딕셔너리에 key가 없으면 keyerror가 발생함
+    2) 의 경우 key가 없으면 x를 반환한다.
     ```python
-    from collections import deque 
-    my_deque = deque()
-    my_deque.append(3)
-    print(len(my_deque))
+    my_dict.get('name', '홍길동')
     ```
-- #### deque :: pop 연산
+
+- #### Dictionary :: Set
+    딕셔너리에 값을 집어넣거나 업데이트 시 [key]를 사용한다.
     ```python
-    from collections import deque 
-    my_deque = deque([1,2,3])
-    while my_deque:
-        my_deque.popleft()
+    my_dict['name'] = '에이미'
+    my_dict['age'] += 30
     ```
-- #### deque :: clear
+
+- #### Dictionary :: Delete
+    딕셔너리에 특정 key값을 지우려면
+    1) del dict1[key] (key가 없으면 keyerror)
+    2) dict1.pop(key, default_value) (key가 없으면 default_value 리턴)
     ```python
-    from collections import deque 
-    my_deque = deque([1,2,3])
-    my_deque.clear()
+    del my_dict['김철수']
+    my_dict.pop('김철수', 100)
+    ```
+
+- #### Dictionary :: Iterate
+    ```python
+    for key in my_dict:
+        print(key, my_dict[key]) #key만 조회
+    
+    for key, value in my_dict.items():
+        print(key, value) #key와 value 같이 조회
+    print(my_dict.keys()) #key만 뽑아냄
+    print(my_dict.values()) #값만 뽑아냄
+    print(my_dict.items()) #key, value를 튜플로 뽑아냄
+    ```
+
+- #### Dictionary :: 집계를 위한 클래스 collections Counter class
+    문제를 풀다보면 어떤 원소 x가 몇번 등장하는지 셀 필요성이 있음
+    ```python
+    from collections import Counter
+    my_list = ["박수진", "박수진", "홍길동", "김철수", "김철수"]
+    my_counter = Counter(my_list)
+    my_counter['박수진']
+    dict(my_counter)
     ```
 <br>
 <br>
 
-## 힙 개념 및 사용방법
+## 집합 개념 및 사용방법
 ---
-### heap
-heap은 데이터가 지속적으로 정렬되어야 하며, 데이터의 삽입, 삭제가 빈번하게 일어날 때 사용하는 것이 좋다.
-```python
-import heapq 
-```
+### Python의 집합은 Set
+### 집합은 언제 사용해야하는가.
+- 리스트를 사용할 수 없을 때 : 원소에 접근하는 요소가 숫자 인덱스가 아닌 문자열이나 튜플일때, 사용한다.
+- 다루는 데이터의 삽입/삭제/탐색 이 자주 일어날 때 (데이터가 정수가 아닐 때) : 문자열 등 리스트가 index로 활용하지 못하는 데이터를 빠르게 탐색할 때 매우 유용함. O(1) 소요
+- 수학적으로 교집합/합집합/차집합을 구할 때 : 파이썬의 set은 수학 집합의 대부분의 기능을 수행한다.
 
-- #### heapq의 time complexity 
-    * get item : O(1)
-    * insert item : O(logn)
-    * delete item : O(logn)
-    * search item : O(n)
 
-- #### heapq :: heapify
-    주어진 리스트를 힙정렬한다.
+### set와 리스트의 시간 복잡도 비교
+
+| Operation | Dictionary | List |
+| --- | :---: | ---:|
+| 탐색 | O(1) | "abc" in my_set |
+| 제거 | O(1) | my_set.remove("abc") |
+| 합집합 | O(len(set1) + len(set2)) | my_set1 | my_set2 |
+| 교집합 | O(min(len(set1), len(set2))) | my_set1 & my_set2 |
+| 차집합 | O(len(set1)) | my_set1 - my_set2 |
+| 합집합 - 교집합 | O(len(set1)) | my_set1 ^ my_set2 |
+
+### 집합의 주의사항
+hashable한 타입만 집합에 넣을 수 있다. list, dict, set 유저 클래스 사용 불가능, tuple은 삽입 가능!
+     
+- #### Set :: init
     ```python
-    import heapq 
-    my_list = [1, 5, 3, 4]
-    heapq.heapify(my_list)
+    empty_set = set()
+    my_set = set([1,2,3,4])
+    ```
+- #### Set :: add
+    ```python
+    my_set.add('demi')
     ```
 
-- #### heapq :: heappush (logn)
-    힙 정렬된 리스트의 힙 상태를 유지하면서 데이터를 삽입시킨다.
-    (힙 정렬을 하지 않고 heappush시 이상하게 데이터가 구성된다.)
+- #### Set :: delete
     ```python
-    import heapq 
-    my_list = [1, 5, 3, 4]
-    heapq.heapify(my_list)
-    heapq.heappush(my_list, 7)
+    my_set.remove('demi')
     ```
 
-
-- #### heapq :: heappop (logn)
-    힙 정렬된 리스트의 가장 작은 원소를 빼내고 나머지 원소가 힙을 유지하도록 정리한다.
-    (힙 정렬을 하지 않고 heappush시 이상하게 데이터가 구성된다.)
+- #### Set :: 집합
     ```python
-    import heapq 
-    my_list = [1, 5, 3, 4]
-    heapq.heapify(my_list)
-    print(my_list[0]) #힙 리스트에서 가장 작은 원소는 항상 [0]에 있다.
-    print(heapq.heappop(my_list))
+    set1 = set([1,2,3,4,5])
+    set2 = set([3,4,5,6,7])
+    f_set = set1 | set2
+    s_set = set1 & set2
+    t_set = set1 - set2
     ```
-
 <br>
 <br>
