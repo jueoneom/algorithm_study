@@ -75,8 +75,8 @@ heapq.heappush(my_list, 7)
 
 
 - #### heapq :: heappop (logn)
-힙 정렬된 리스트의 가장 작은 원소를 빼내고 나머지 원소가 힙을 유지하도록 정리한다.
-(힙 정렬을 하지 않고 heappush시 이상하게 데이터가 구성된다.)
+    힙 정렬된 리스트의 가장 작은 원소를 빼내고 나머지 원소가 힙을 유지하도록 정리한다.
+    (힙 정렬을 하지 않고 heappush시 이상하게 데이터가 구성된다.)
 ```python
 import heapq 
 my_list = [1, 5, 3, 4]
@@ -85,4 +85,5 @@ print(my_list[0]) #힙 리스트에서 가장 작은 원소는 항상 [0]에 있
 print(heapq.heappop(my_list))
 ```
 
+<br>
 <br>
