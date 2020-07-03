@@ -50,10 +50,10 @@ import heapq
 ```
 
 - #### heapq의 time complexity
--- get item : O(1)
--- insert item : O(logn)
--- delete item : O(logn)
--- search item : O(n)
+* get item : O(1)
+* insert item : O(logn)
+* delete item : O(logn)
+* search item : O(n)
 
 - #### heapq :: heapify
 주어진 리스트를 힙정렬한다.
