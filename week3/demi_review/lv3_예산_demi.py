@@ -45,3 +45,5 @@ def solution(budgets, M):
         elif M >= total_budget:
             left = mid + 1
     return left - 1 
+
+    
