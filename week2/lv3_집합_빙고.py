@@ -31,3 +31,38 @@ def solution(board, nums):
     
             
     return answer
+
+
+
+    '''
+규칙
+    1. 가로, 세로 왼, 오 대각선 방향으로 빙고 
+    2. 왼 대각선 규칙: x == y
+    3. 오 대각선 규칙: x - y = n - 1
+    4. 빙고 개수 리턴
+로직 
+    1. nums에 있는 빙고가 몇개 존재하는지 확인하면 된다.
+    2. [0] * n (* 2)(가로, 세로엔 몇개씩 체크할 수 있는가?)
+    3. [0] * 2 (대각선)
+    4. for문을 돌려 nums가 있는지 확인해본다.
+    5. 가로 세로, 대각선 리스트가 n개인 갯수를 구해 리턴하면 됨
+'''
+
+
+def solution(board, nums):
+    n = len(board)
+    row_count, col_count = [0] * n, [0] * n
+    diagnal_count = [0] * 2
+    nums = set(nums)
+    
+    for j, row in enumerate(board):
+        for i, item in enumerate(row):
+            if item in nums:
+                row_count[i] += 1
+                col_count[j] += 1
+                if i == j:
+                    diagnal_count[0] += 1
+                if i + j == n - 1:
+                    diagnal_count[1] += 1
+                    
+    return (row_count + col_count + diagnal_count).count(n)
